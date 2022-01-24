@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comments</title>
+</head>
+
+<body>
+    <div>
+        <h1>Comments</h1>
+    </div>
+    <div id="app">
+        <card></card>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            components: {
+                'card': {
+                    name: 'card',
+                    data() {
+                        return {
+                            value: '',
+                            items: []
+                        }
+                    },
+                    template: ` <div class="list">
+            <ul>
+                <input type="text" placeholder="Add comment..." v-model="value" @keyup.enter="addVal">
+                <button @click="addVal">+</button>
+                <br>
+                <li v-for=" val in items " :key="val.id">{{val.comment}}
+                    <ul>
+                        <card></card>
+                    </ul>
+                </li>
+            </ul>
+        </div>`,
+                    methods: {
+                        addVal() {
+                            if (this.value !== '') {
+                                this.items.push({
+                                    comment: this.value
+                                })
+                                this.value = ''
+                            }
+                        }
+                    },
+                },
+            }
+        });
+    </script>
+</body>
+
+</html>
